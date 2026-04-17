@@ -1,5 +1,7 @@
 # Rainfall Prediction in Australia using Classical Machine Learning
 
+[![CI](https://github.com/ezedeem223/rainfall-prediction-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/ezedeem223/rainfall-prediction-classifier/actions/workflows/ci.yml)
+
 This repository predicts whether it will rain the next day in Australia from tabular weather observations. The project keeps the original notebook-based work intact, but wraps it in a cleaner Python package, reproducible scripts, structured results, lightweight tests, and CI so it reads like a portfolio project instead of a one-off notebook submission.
 
 ## Quick Start
@@ -9,6 +11,8 @@ make setup
 make train
 make evaluate
 ```
+
+Place the dataset at `data/raw/weatherAUS.csv` before running `make train` or `make evaluate`.
 
 ## Why This Project Matters
 
@@ -160,13 +164,13 @@ Random Forest feature importance from the preserved notebook artifacts:
 
 ![Random Forest feature importance from the preserved notebook artifacts](results/feature_importance.png)
 
+Random Forest confusion matrix from the preserved notebook artifacts:
+
+![Random Forest confusion matrix from the preserved notebook artifacts](results/confusion_matrix.png)
+
 Additional preserved Logistic Regression confusion matrix:
 
 `results/logistic_regression_confusion_matrix.png`
-
-Additional preserved Random Forest confusion matrix:
-
-`results/confusion_matrix.png`
 
 Illustrative inference example after a trained model artifact is available:
 
