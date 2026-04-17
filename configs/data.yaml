@@ -1,0 +1,24 @@
+dataset:
+  path: data/raw/weatherAUS.csv
+  target_column: RainTomorrow
+  date_column: Date
+  add_season_feature: true
+  drop_date_column: true
+  drop_missing_rows: true
+  location_filter: []
+  numerical_features: []
+  categorical_features: []
+  notebook_reference:
+    preserved_notebook_path: notebooks/rainfall_prediction_classifier.ipynb
+    note: >
+      The preserved notebook currently narrows the analysis to Melbourne-area locations
+      and temporarily renames RainTomorrow to RainToday for a same-day rainfall variant.
+
+split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+preprocessing:
+  scaler: standard
+  one_hot_handle_unknown: ignore

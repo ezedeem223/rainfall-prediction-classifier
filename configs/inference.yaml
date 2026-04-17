@@ -1,0 +1,11 @@
+defaults:
+  data_config: configs/data.yaml
+
+paths:
+  results_dir: results
+  model_path: models/rainfall_prediction_pipeline.joblib
+  input_path: results/sample_predictions/example_input.json
+  output_path: results/sample_predictions/example_predictions.json
+
+prediction:
+  include_probabilities: true

@@ -1,0 +1,26 @@
+[
+  {
+    "Date": "2017-06-01",
+    "Location": "Melbourne",
+    "MinTemp": 9.3,
+    "MaxTemp": 15.2,
+    "Rainfall": 2.4,
+    "Evaporation": 2.6,
+    "Sunshine": 4.1,
+    "WindGustDir": "W",
+    "WindGustSpeed": 39,
+    "WindDir9am": "NW",
+    "WindDir3pm": "W",
+    "WindSpeed9am": 13,
+    "WindSpeed3pm": 20,
+    "Humidity9am": 78,
+    "Humidity3pm": 71,
+    "Pressure9am": 1015.7,
+    "Pressure3pm": 1012.8,
+    "Cloud9am": 7,
+    "Cloud3pm": 7,
+    "Temp9am": 11.2,
+    "Temp3pm": 13.4,
+    "RainToday": "Yes"
+  }
+]

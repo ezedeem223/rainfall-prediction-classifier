@@ -1,0 +1,51 @@
+{
+  "historical_repository_results": {
+    "source": "Original README-reported metrics preserved during the refactor.",
+    "models": {
+      "logistic_regression": {
+        "train_accuracy": 0.8403,
+        "test_accuracy": 0.8424
+      },
+      "random_forest": {
+        "train_accuracy": 0.9999,
+        "test_accuracy": 0.8428
+      },
+      "xgboost": {
+        "train_accuracy": 0.8711,
+        "test_accuracy": 0.8519
+      }
+    }
+  },
+  "preserved_notebook_exports": {
+    "source": "PNG exports preserved from the repository before refactoring.",
+    "random_forest": {
+      "artifact": "results/confusion_matrix.png",
+      "confusion_matrix": [
+        [
+          1098,
+          56
+        ],
+        [
+          174,
+          184
+        ]
+      ],
+      "derived_test_accuracy": 0.8478835978835979
+    },
+    "logistic_regression": {
+      "artifact": "results/logistic_regression_confusion_matrix.png",
+      "confusion_matrix": [
+        [
+          1071,
+          83
+        ],
+        [
+          174,
+          184
+        ]
+      ],
+      "derived_test_accuracy": 0.830026455026455
+    }
+  },
+  "note": "Running the training and evaluation scripts will replace this file with fresh generated metrics."
+}

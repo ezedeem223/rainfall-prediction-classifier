@@ -1,101 +1,261 @@
-# Rainfall Prediction in Australia
+# Rainfall Prediction in Australia using Classical Machine Learning
 
-This project implements a machine learning model to predict whether it will rain the next day in Australia. The model is built and trained using a dataset published on Kaggle.
+This repository predicts whether it will rain the next day in Australia from tabular weather observations. The project keeps the original notebook-based work intact, but wraps it in a cleaner Python package, reproducible scripts, structured results, lightweight tests, and CI so it reads like a portfolio project instead of a one-off notebook submission.
 
-[![Kaggle Dataset](https://img.shields.io/badge/Dataset-Kaggle-blue.svg )](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package )
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg )](https://www.python.org/downloads/ )
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg )](https://opensource.org/licenses/MIT )
+## Quick Start
 
----
+```bash
+make setup
+make train
+make evaluate
+```
 
-## 🎯 Project Goal
+## Why This Project Matters
 
-The main goal is to build an accurate classifier that predicts the `RainTomorrow` variable based on other weather features available in the dataset. Several algorithms were explored and evaluated to achieve the best possible performance.
+This project demonstrates how to structure a production-ready machine learning pipeline beyond notebooks.
 
----
+## Key Features
 
-## 📂 Project Structure
+- Classical tabular classification for Australian weather data
+- Comparison of Logistic Regression, Random Forest, and XGBoost
+- Reusable preprocessing pipeline with categorical encoding and numerical scaling
+- Config-driven train, evaluate, and predict scripts
+- Saved model artifact workflow for later inference
+- Preserved historical notebook and exported plots for reference
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    A[Weather Data] --> B[Preprocessing]
+    B --> C[Model]
+    C --> D[Evaluation]
+    D --> E[Prediction]
+```
+
+## Project Structure
+
+```text
 rainfall-prediction-classifier/
-│
-├── rainfall prediction classifier.ipynb    
-├── README.md                               
-└── requirements.txt                        
+├── .env.example
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── .gitignore
+├── LICENSE
+├── Makefile
+├── README.md
+├── configs/
+│   ├── data.yaml
+│   ├── inference.yaml
+│   └── train.yaml
+├── data/
+│   ├── README.md
+│   └── raw/
+│       └── .gitkeep
+├── models/
+│   ├── .gitkeep
+│   └── README.md
+├── notebooks/
+│   ├── exploration.ipynb
+│   └── rainfall_prediction_classifier.ipynb
+├── pyproject.toml
+├── requirements-dev.txt
+├── requirements.txt
+├── results/
+│   ├── README.md
+│   ├── classification_report.txt
+│   ├── confusion_matrix.png
+│   ├── feature_importance.png
+│   ├── logistic_regression_confusion_matrix.png
+│   ├── metrics.json
+│   ├── model_comparison.csv
+│   └── sample_predictions/
+│       ├── README.md
+│       └── example_input.json
+├── scripts/
+│   ├── run_evaluate.py
+│   ├── run_predict.py
+│   └── run_train.py
+├── src/
+│   └── rainfall_prediction/
+│       ├── __init__.py
+│       ├── config.py
+│       ├── data.py
+│       ├── evaluate.py
+│       ├── features.py
+│       ├── pipeline.py
+│       ├── predict.py
+│       ├── train.py
+│       ├── utils.py
+│       └── visualization.py
+└── tests/
+    ├── test_config.py
+    ├── test_pipeline.py
+    └── test_predict.py
+```
 
----
+## Dataset
 
-## 🛠️ Tech Stack
+- Source: [Kaggle weather dataset](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package)
+- Expected local CSV: `data/raw/weatherAUS.csv`
+- Refactored package target column: `RainTomorrow`
+- The raw dataset is not committed to the repository
 
-*   **Programming Language:** Python 3.9
-*   **Data Analysis & Processing:** Pandas, NumPy
-*   **Data Visualization:** Matplotlib, Seaborn
-*   **Machine Learning Models:** Scikit-learn (Logistic Regression, RandomForestClassifier), XGBoost (XGBClassifier)
+Place the CSV at:
 
----
+```text
+data/raw/weatherAUS.csv
+```
 
-## 📋 Project Workflow
+The historical notebook currently loads an IBM-hosted mirror named `weatherAUS-2.csv`. That notebook is preserved as-is for reference, while the refactored scripts expect a local Kaggle CSV for reproducibility.
 
-1.  **Exploratory Data Analysis (EDA):**
-    *   Understand data dimensions and variable types (numerical and categorical).
-    *   Handle Missing Values.
-    *   Analyze the distribution of the target variables (`RainToday`, `RainTomorrow`).
-    *   Study the correlation between features using Heatmaps.
+## Methodology
 
-2.  **Data Preprocessing:**
-    *   Separate numerical and categorical features.
-    *   Handle outliers in numerical features.
-    *   Encode categorical features into numerical format using One-Hot Encoding.
-    *   Scale numerical features using `MinMaxScaler`.
+The refactored package keeps the original modeling direction and preprocessing style:
 
-3.  **Model Building & Training:**
-    *   Split the data into training and testing sets (`train_test_split`).
-    *   Train three different models:
-        *   Logistic Regression
-        *   Random Forest Classifier
-        *   XGBoost Classifier
+1. Load tabular weather data.
+2. Drop rows with missing values.
+3. Derive a seasonal feature from `Date`.
+4. One-hot encode categorical columns.
+5. Scale numerical columns.
+6. Split the data with a stratified train/test split.
+7. Compare Logistic Regression, Random Forest, and XGBoost.
 
-4.  **Model Evaluation:**
-    *   Evaluate the accuracy of each model on the test set.
-    *   Compare model performance to select the best one.
+The preserved notebook also includes an exploratory variant that:
 
----
+- narrows the data to Melbourne, Melbourne Airport, and Watsonia,
+- renames `RainTomorrow` to `RainToday` for a same-day rainfall framing,
+- exports Random Forest and Logistic Regression confusion matrices.
 
-## 📊 Results
+That notebook workflow is kept in `notebooks/rainfall_prediction_classifier.ipynb` as historical project context, but the package defaults back to the repository's public framing of predicting `RainTomorrow`.
 
-The performance of the three models was compared based on their accuracy on the test data:
+## Results
 
-| Model                        | Train Set Accuracy | Test Set Accuracy |
-| ---------------------------- | ------------------ | ----------------- |
-| **Logistic Regression**      | 84.03%             | 84.24%            |
-| **Random Forest Classifier** | 99.99%             | 84.28%            |
-| **XGBoost Classifier**       | 87.11%             | **85.19%**        |
+The original repository README reported the following model comparison:
 
-**Conclusion:** The **XGBoost Classifier** demonstrated the best performance on the test set, making it the recommended model for this problem.
+| Model | Train Accuracy | Test Accuracy |
+| --- | ---: | ---: |
+| Logistic Regression | 84.03% | 84.24% |
+| Random Forest | 99.99% | 84.28% |
+| XGBoost | 87.11% | **85.19%** |
 
----
+These values are preserved in `results/metrics.json` and `results/model_comparison.csv` as historical repository results.
 
-## 🚀 How to Run
+Important provenance note:
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/ezedeem223/rainfall-prediction-classifier.git
-    cd rainfall-prediction-classifier
-    ```
+- The currently tracked notebook file and exported PNGs preserve Random Forest and Logistic Regression visual outputs.
+- The current tracked notebook file does **not** contain XGBoost training cells or a structured metric table that re-verifies the XGBoost numbers from source.
+- Because of that, the XGBoost row above is preserved from the original repository README rather than re-derived from the tracked notebook file.
 
-2.  **(Optional but recommended ) Create a virtual environment:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
+## Why XGBoost Performed Best
 
-3.  **Install dependencies:**
-    *   *For best results, first generate a `requirements.txt` file by running `pip freeze > requirements.txt` in your local environment.*
-    *   *Then, anyone can install the dependencies using:*
-        ```bash
-        pip install -r requirements.txt
-        ```
+On mixed tabular weather data, gradient boosting often captures non-linear thresholds and feature interactions more effectively than Logistic Regression, while generalizing better than an overfit Random Forest. That fits the historical pattern reported here: Random Forest nearly memorized the training data, while XGBoost achieved the strongest held-out accuracy.
 
-4.  **Run the Jupyter Notebook:**
-    ```bash
-    jupyter notebook "rainfall prediction classifier.ipynb"
-    ```
+## Sample Outputs
+
+Preserved exported notebook artifacts:
+
+Random Forest confusion matrix:
+
+![Random Forest confusion matrix](results/confusion_matrix.png)
+
+Random Forest feature importance:
+
+![Random Forest feature importance](results/feature_importance.png)
+
+Additional preserved Logistic Regression confusion matrix:
+
+`results/logistic_regression_confusion_matrix.png`
+
+Illustrative inference example after a trained model artifact is available:
+
+Input:
+
+```json
+{
+  "Date": "2017-06-01",
+  "Location": "Melbourne",
+  "MinTemp": 9.3,
+  "MaxTemp": 15.2,
+  "Humidity3pm": 71,
+  "Pressure3pm": 1012.8,
+  "RainToday": "Yes"
+}
+```
+
+Output:
+
+```text
+RainTomorrow: Yes
+```
+
+The exact label depends on the trained model artifact and local dataset, but this is the intended prediction interface.
+
+## Installation
+
+```bash
+python -m venv .venv
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python -m pip install -e .
+```
+
+## Usage
+
+Train all configured models and save the selected artifact:
+
+```bash
+python scripts/run_train.py --config configs/train.yaml
+```
+
+Evaluate the saved model and write structured outputs under `results/`:
+
+```bash
+python scripts/run_evaluate.py --config configs/inference.yaml
+```
+
+Run inference on the example payload:
+
+```bash
+python scripts/run_predict.py --config configs/inference.yaml --input results/sample_predictions/example_input.json
+```
+
+You can also use the `Makefile` shortcuts:
+
+```bash
+make setup
+make install-dev
+make test
+make train
+make evaluate
+make predict
+```
+
+## Notebooks
+
+- `notebooks/rainfall_prediction_classifier.ipynb`: preserved historical notebook workflow
+- `notebooks/exploration.ipynb`: lightweight package-driven notebook stub that imports the refactored modules
+
+## Limitations
+
+- The dataset is not committed, so training and evaluation require a local CSV checkout.
+- The preserved notebook and the original README do not line up perfectly: the notebook contains a Melbourne-area same-day rainfall variant, while the README frames the task as Australia-wide `RainTomorrow` prediction.
+- No trained model artifact is committed by default.
+- The committed results files are partly seeded from historical repository outputs until you rerun the scripts locally.
+
+## Future Work
+
+- Add stronger feature engineering beyond the season feature
+- Use temporal validation instead of a purely random split
+- Tune XGBoost and Random Forest more systematically
+- Add probability calibration
+- Package a lightweight API or dashboard around the saved model artifact
+
+## License
+
+This project is released under the [MIT License](LICENSE).

@@ -1,0 +1,36 @@
+Preserved exported notebook reports
+=================================
+
+These reports were derived from the confusion matrix PNG exports that were already tracked in the repository before the refactor.
+They are included as supporting context only. They are not a substitute for rerunning the evaluation scripts on a local dataset checkout.
+
+Random Forest export
+--------------------
+
+              precision    recall  f1-score   support
+
+           0     0.8632    0.9515    0.9052      1154
+           1     0.7667    0.5140    0.6154       358
+
+    accuracy                         0.8479      1512
+   macro avg     0.8149    0.7327    0.7603      1512
+weighted avg     0.8403    0.8479    0.8366      1512
+
+
+Logistic Regression export
+--------------------------
+
+              precision    recall  f1-score   support
+
+           0     0.8602    0.9281    0.8929      1154
+           1     0.6891    0.5140    0.5888       358
+
+    accuracy                         0.8300      1512
+   macro avg     0.7747    0.7210    0.7408      1512
+weighted avg     0.8197    0.8300    0.8209      1512
+
+
+XGBoost
+-------
+
+No structured classification report was preserved in the tracked repository files. The historical accuracy values for XGBoost are documented in `results/metrics.json` and `results/model_comparison.csv` based on the pre-refactor README.

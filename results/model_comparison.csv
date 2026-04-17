@@ -1,0 +1,4 @@
+model_name,model_label,train_accuracy,test_accuracy,source,notes
+logistic_regression,Logistic Regression,0.8403,0.8424,original_repository_readme,Historical repository metric preserved during refactor
+random_forest,Random Forest,0.9999,0.8428,original_repository_readme,Historical repository metric preserved during refactor
+xgboost,XGBoost,0.8711,0.8519,original_repository_readme,Historical repository metric preserved during refactor; current tracked notebook file does not include XGBoost cells

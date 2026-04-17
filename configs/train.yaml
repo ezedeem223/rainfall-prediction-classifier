@@ -1,0 +1,51 @@
+defaults:
+  data_config: configs/data.yaml
+
+paths:
+  results_dir: results
+  model_output_path: models/rainfall_prediction_pipeline.joblib
+
+training:
+  models:
+    - logistic_regression
+    - random_forest
+    - xgboost
+  selected_model: best
+  selection_metric: test_accuracy
+  cross_validation_folds: 5
+  random_state: 42
+  verbose: 0
+  param_grid:
+    logistic_regression:
+      classifier__solver:
+        - liblinear
+      classifier__penalty:
+        - l1
+        - l2
+      classifier__class_weight:
+        - null
+        - balanced
+    random_forest:
+      classifier__n_estimators:
+        - 50
+        - 100
+      classifier__max_depth:
+        - null
+        - 10
+        - 20
+      classifier__min_samples_split:
+        - 2
+        - 5
+    xgboost:
+      classifier__n_estimators:
+        - 100
+        - 200
+      classifier__max_depth:
+        - 3
+        - 6
+      classifier__learning_rate:
+        - 0.05
+        - 0.1
+      classifier__subsample:
+        - 0.8
+        - 1.0
