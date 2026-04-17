@@ -156,17 +156,17 @@ On mixed tabular weather data, gradient boosting often captures non-linear thres
 
 Preserved exported notebook artifacts:
 
-Random Forest confusion matrix:
+Random Forest feature importance from the preserved notebook artifacts:
 
-![Random Forest confusion matrix](results/confusion_matrix.png)
-
-Random Forest feature importance:
-
-![Random Forest feature importance](results/feature_importance.png)
+![Random Forest feature importance from the preserved notebook artifacts](results/feature_importance.png)
 
 Additional preserved Logistic Regression confusion matrix:
 
 `results/logistic_regression_confusion_matrix.png`
+
+Additional preserved Random Forest confusion matrix:
+
+`results/confusion_matrix.png`
 
 Illustrative inference example after a trained model artifact is available:
 
