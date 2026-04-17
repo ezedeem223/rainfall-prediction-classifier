@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ezedeem223/rainfall-prediction-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/ezedeem223/rainfall-prediction-classifier/actions/workflows/ci.yml)
 
-This repository predicts whether it will rain the next day in Australia from tabular weather observations. The project keeps the original notebook-based work intact, but wraps it in a cleaner Python package, reproducible scripts, structured results, lightweight tests, and CI so it reads like a portfolio project instead of a one-off notebook submission.
+This repository predicts whether it will rain the next day in Australia from tabular weather observations. It combines archived exploratory analysis with a structured Python package, reproducible scripts, preserved evaluation artifacts, lightweight tests, and CI in a single maintainable project layout.
 
 ## Quick Start
 
@@ -25,7 +25,7 @@ This project demonstrates how to structure a production-ready machine learning p
 - Reusable preprocessing pipeline with categorical encoding and numerical scaling
 - Config-driven train, evaluate, and predict scripts
 - Saved model artifact workflow for later inference
-- Preserved historical notebook and exported plots for reference
+- Archived exploratory notebooks and preserved evaluation artifacts
 
 ## Architecture Diagram
 
@@ -103,7 +103,7 @@ rainfall-prediction-classifier/
 
 - Source: [Kaggle weather dataset](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package)
 - Expected local CSV: `data/raw/weatherAUS.csv`
-- Refactored package target column: `RainTomorrow`
+- Current package target column: `RainTomorrow`
 - The raw dataset is not committed to the repository
 
 Place the CSV at:
@@ -112,11 +112,11 @@ Place the CSV at:
 data/raw/weatherAUS.csv
 ```
 
-The historical notebook currently loads an IBM-hosted mirror named `weatherAUS-2.csv`. That notebook is preserved as-is for reference, while the refactored scripts expect a local Kaggle CSV for reproducibility.
+An earlier development notebook references a legacy CSV mirror named `weatherAUS-2.csv`. The current scripts expect a local Kaggle CSV for reproducibility.
 
 ## Methodology
 
-The refactored package keeps the original modeling direction and preprocessing style:
+The current package keeps the established modeling direction and preprocessing style:
 
 1. Load tabular weather data.
 2. Drop rows with missing values.
@@ -126,17 +126,17 @@ The refactored package keeps the original modeling direction and preprocessing s
 6. Split the data with a stratified train/test split.
 7. Compare Logistic Regression, Random Forest, and XGBoost.
 
-The preserved notebook also includes an exploratory variant that:
+An archived development notebook also includes an exploratory variant that:
 
 - narrows the data to Melbourne, Melbourne Airport, and Watsonia,
 - renames `RainTomorrow` to `RainToday` for a same-day rainfall framing,
 - exports Random Forest and Logistic Regression confusion matrices.
 
-That notebook workflow is kept in `notebooks/rainfall_prediction_classifier.ipynb` as historical project context, but the package defaults back to the repository's public framing of predicting `RainTomorrow`.
+That notebook remains in `notebooks/rainfall_prediction_classifier.ipynb` as part of the project record, while the package defaults to the repository's public framing of predicting `RainTomorrow`.
 
 ## Results
 
-The original repository README reported the following model comparison:
+Earlier repository reporting documented the following model comparison:
 
 | Model | Train Accuracy | Test Accuracy |
 | --- | ---: | ---: |
@@ -144,13 +144,13 @@ The original repository README reported the following model comparison:
 | Random Forest | 99.99% | 84.28% |
 | XGBoost | 87.11% | **85.19%** |
 
-These values are preserved in `results/metrics.json` and `results/model_comparison.csv` as historical repository results.
+These values are retained in `results/metrics.json` and `results/model_comparison.csv` as historical project results.
 
 Important provenance note:
 
-- The currently tracked notebook file and exported PNGs preserve Random Forest and Logistic Regression visual outputs.
-- The current tracked notebook file does **not** contain XGBoost training cells or a structured metric table that re-verifies the XGBoost numbers from source.
-- Because of that, the XGBoost row above is preserved from the original repository README rather than re-derived from the tracked notebook file.
+- The archived notebook and exported PNGs retain Random Forest and Logistic Regression visual outputs.
+- The archived notebook does **not** contain XGBoost training cells or a structured metric table that re-verifies the XGBoost numbers from source.
+- Because of that, the XGBoost row above is retained from earlier repository reporting rather than re-derived from the archived notebook.
 
 ## Why XGBoost Performed Best
 
@@ -158,15 +158,15 @@ On mixed tabular weather data, gradient boosting often captures non-linear thres
 
 ## Sample Outputs
 
-Preserved exported notebook artifacts:
+Preserved evaluation artifacts from earlier development runs:
 
-Random Forest feature importance from the preserved notebook artifacts:
+Random Forest feature importance from preserved evaluation artifacts:
 
-![Random Forest feature importance from the preserved notebook artifacts](results/feature_importance.png)
+![Random Forest feature importance from preserved evaluation artifacts](results/feature_importance.png)
 
-Random Forest confusion matrix from the preserved notebook artifacts:
+Random Forest confusion matrix from preserved evaluation artifacts:
 
-![Random Forest confusion matrix from the preserved notebook artifacts](results/confusion_matrix.png)
+![Random Forest confusion matrix from preserved evaluation artifacts](results/confusion_matrix.png)
 
 Additional preserved Logistic Regression confusion matrix:
 
@@ -242,15 +242,15 @@ make predict
 
 ## Notebooks
 
-- `notebooks/rainfall_prediction_classifier.ipynb`: preserved historical notebook workflow
-- `notebooks/exploration.ipynb`: lightweight package-driven notebook stub that imports the refactored modules
+- `notebooks/rainfall_prediction_classifier.ipynb`: archived exploratory notebook from an earlier development stage
+- `notebooks/exploration.ipynb`: lightweight notebook that imports the package modules for quick inspection
 
 ## Limitations
 
 - The dataset is not committed, so training and evaluation require a local CSV checkout.
-- The preserved notebook and the original README do not line up perfectly: the notebook contains a Melbourne-area same-day rainfall variant, while the README frames the task as Australia-wide `RainTomorrow` prediction.
+- The archived notebook and the public project framing do not line up perfectly: the notebook contains a Melbourne-area same-day rainfall variant, while the repository is framed around Australia-wide `RainTomorrow` prediction.
 - No trained model artifact is committed by default.
-- The committed results files are partly seeded from historical repository outputs until you rerun the scripts locally.
+- The committed results files are partly seeded from earlier repository outputs until you rerun the scripts locally.
 
 ## Future Work
 
