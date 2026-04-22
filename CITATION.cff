@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it using the metadata below."
+title: "Rainfall Prediction Classifier"
+authors:
+  - given-names: "Mohamad"
+    family-names: "Sabbagh"
+repository-code: "https://github.com/ezedeem223/rainfall-prediction-classifier"
+license: "MIT"

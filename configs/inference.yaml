@@ -1,5 +1,5 @@
 defaults:
-  data_config: configs/data.yaml
+  data_config: data.yaml
 
 paths:
   results_dir: results

@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rainfall-prediction-classifier"
-version = "0.1.0"
-description = "Portfolio-ready rainfall prediction workflow for Australian weather data."
+version = "1.0.0"
+description = "Rainfall prediction in Australia using classical machine learning on tabular weather data."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-  { name = "Repository Maintainer" }
+  { name = "Mohamad Sabbagh" }
 ]
 dependencies = [
   "joblib>=1.3,<2.0",
@@ -22,6 +22,9 @@ dependencies = [
   "seaborn>=0.13,<1.0",
   "xgboost>=2.0,<3.0",
 ]
+
+[project.urls]
+Repository = "https://github.com/ezedeem223/rainfall-prediction-classifier"
 
 [project.optional-dependencies]
 dev = [
@@ -50,6 +53,7 @@ src_paths = ["src", "scripts", "tests"]
 [tool.pytest.ini_options]
 addopts = "-q"
 testpaths = ["tests"]
+pythonpath = ["src"]
 
 [tool.ruff]
 line-length = 100

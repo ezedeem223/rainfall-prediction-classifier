@@ -33,3 +33,11 @@ def test_load_config_applies_environment_override(tmp_path: Path, monkeypatch) -
     config = load_config(config_path)
 
     assert config["paths"]["model_path"] == "models/override.joblib"
+
+
+def test_repository_configs_load() -> None:
+    train_config = load_config(Path("configs/train.yaml"))
+    inference_config = load_config(Path("configs/inference.yaml"))
+
+    assert train_config["data"]["dataset"]["path"] == "data/raw/weatherAUS.csv"
+    assert inference_config["paths"]["model_path"] == "models/rainfall_prediction_pipeline.joblib"

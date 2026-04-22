@@ -1,0 +1,3 @@
+# Preserve archived notebooks in the repository without letting them define the
+# maintained language surface on GitHub.
+notebooks/** linguist-vendored

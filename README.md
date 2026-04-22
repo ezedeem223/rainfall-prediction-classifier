@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ezedeem223/rainfall-prediction-classifier/actions/workflows/ci.yml/badge.svg)](https://github.com/ezedeem223/rainfall-prediction-classifier/actions/workflows/ci.yml)
 
-This repository predicts whether it will rain the next day in Australia from tabular weather observations. It combines archived exploratory analysis with a structured Python package, reproducible scripts, preserved evaluation artifacts, lightweight tests, and CI in a single maintainable project layout.
+This repository predicts whether it will rain the next day in Australia from tabular weather observations. The maintained runtime surface lives under `src/` and `scripts/`, while archived exploratory notebooks remain in `notebooks/` for provenance. Together they provide a reproducible, testable Python project without hiding the earlier notebook-led development history.
 
 ## Quick Start
 
@@ -16,16 +16,17 @@ Place the dataset at `data/raw/weatherAUS.csv` before running `make train` or `m
 
 ## Why This Project Matters
 
-This project demonstrates how to structure a production-ready machine learning pipeline beyond notebooks.
+This project shows how to turn an exploratory tabular machine learning workflow into a maintainable Python repository. The installable package, config-driven scripts, lightweight tests, and preserved artifacts make the project reproducible without pretending the archived notebooks are the canonical runtime entrypoint.
 
 ## Key Features
 
+- Installable Python package under `src/rainfall_prediction`
 - Classical tabular classification for Australian weather data
 - Comparison of Logistic Regression, Random Forest, and XGBoost
 - Reusable preprocessing pipeline with categorical encoding and numerical scaling
 - Config-driven train, evaluate, and predict scripts
 - Saved model artifact workflow for later inference
-- Archived exploratory notebooks and preserved evaluation artifacts
+- Archived exploratory notebooks retained separately for provenance
 
 ## Architecture Diagram
 
@@ -41,62 +42,65 @@ flowchart LR
 
 ```text
 rainfall-prediction-classifier/
-├── .env.example
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-├── .gitignore
-├── LICENSE
-├── Makefile
-├── README.md
-├── configs/
-│   ├── data.yaml
-│   ├── inference.yaml
-│   └── train.yaml
-├── data/
-│   ├── README.md
-│   └── raw/
-│       └── .gitkeep
-├── models/
-│   ├── .gitkeep
-│   └── README.md
-├── notebooks/
-│   ├── exploration.ipynb
-│   └── rainfall_prediction_classifier.ipynb
-├── pyproject.toml
-├── requirements-dev.txt
-├── requirements.txt
-├── results/
-│   ├── README.md
-│   ├── classification_report.txt
-│   ├── confusion_matrix.png
-│   ├── feature_importance.png
-│   ├── logistic_regression_confusion_matrix.png
-│   ├── metrics.json
-│   ├── model_comparison.csv
-│   └── sample_predictions/
-│       ├── README.md
-│       └── example_input.json
-├── scripts/
-│   ├── run_evaluate.py
-│   ├── run_predict.py
-│   └── run_train.py
-├── src/
-│   └── rainfall_prediction/
-│       ├── __init__.py
-│       ├── config.py
-│       ├── data.py
-│       ├── evaluate.py
-│       ├── features.py
-│       ├── pipeline.py
-│       ├── predict.py
-│       ├── train.py
-│       ├── utils.py
-│       └── visualization.py
-└── tests/
-    ├── test_config.py
-    ├── test_pipeline.py
-    └── test_predict.py
+|-- .env.example
+|-- .gitattributes
+|-- .github/
+|   `-- workflows/
+|       `-- ci.yml
+|-- .gitignore
+|-- CITATION.cff
+|-- LICENSE
+|-- Makefile
+|-- README.md
+|-- configs/
+|   |-- data.yaml
+|   |-- inference.yaml
+|   `-- train.yaml
+|-- data/
+|   |-- README.md
+|   `-- raw/
+|       `-- .gitkeep
+|-- models/
+|   |-- .gitkeep
+|   `-- README.md
+|-- notebooks/
+|   |-- README.md
+|   |-- exploration.ipynb
+|   `-- rainfall_prediction_classifier.ipynb
+|-- pyproject.toml
+|-- requirements-dev.txt
+|-- requirements.txt
+|-- results/
+|   |-- README.md
+|   |-- classification_report.txt
+|   |-- confusion_matrix.png
+|   |-- feature_importance.png
+|   |-- logistic_regression_confusion_matrix.png
+|   |-- metrics.json
+|   |-- model_comparison.csv
+|   `-- sample_predictions/
+|       |-- README.md
+|       `-- example_input.json
+|-- scripts/
+|   |-- run_evaluate.py
+|   |-- run_predict.py
+|   `-- run_train.py
+|-- src/
+|   `-- rainfall_prediction/
+|       |-- __init__.py
+|       |-- config.py
+|       |-- data.py
+|       |-- evaluate.py
+|       |-- features.py
+|       |-- pipeline.py
+|       |-- predict.py
+|       |-- train.py
+|       |-- utils.py
+|       `-- visualization.py
+`-- tests/
+    |-- test_config.py
+    |-- test_pipeline.py
+    `-- test_predict.py
 ```
 
 ## Dataset
@@ -194,7 +198,7 @@ Output:
 RainTomorrow: Yes
 ```
 
-The exact label depends on the trained model artifact and local dataset, but this is the intended prediction interface.
+The exact label depends on the trained model artifact and local dataset. Any real inference payload must match the feature columns expected by the saved artifact.
 
 ## Installation
 
@@ -229,6 +233,23 @@ Run inference on the example payload:
 python scripts/run_predict.py --config configs/inference.yaml --input results/sample_predictions/example_input.json
 ```
 
+Minimal Python usage is also available once you have a trained artifact and an input payload that matches the saved model's expected feature columns:
+
+```python
+from rainfall_prediction.config import load_config
+from rainfall_prediction.predict import (
+    load_model_artifact,
+    load_prediction_input,
+    predict_from_frame,
+)
+
+config = load_config("configs/inference.yaml")
+artifact = load_model_artifact(config["paths"]["model_path"])
+frame = load_prediction_input("path/to/matching_input.json")
+predictions = predict_from_frame(artifact, frame)
+print(predictions.head())
+```
+
 You can also use the `Makefile` shortcuts:
 
 ```bash
@@ -242,6 +263,7 @@ make predict
 
 ## Notebooks
 
+- `notebooks/README.md`: provenance note for the archived notebook material and the maintained runtime surface
 - `notebooks/rainfall_prediction_classifier.ipynb`: archived exploratory notebook from an earlier development stage
 - `notebooks/exploration.ipynb`: lightweight notebook that imports the package modules for quick inspection
 
@@ -262,4 +284,4 @@ make predict
 
 ## License
 
-This project is released under the [MIT License](LICENSE).
+This repository is released under the [MIT License](LICENSE). Citation metadata is provided in [CITATION.cff](CITATION.cff).
