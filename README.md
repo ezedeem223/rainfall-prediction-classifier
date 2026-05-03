@@ -156,6 +156,18 @@ Important provenance note:
 - The archived notebook does **not** contain XGBoost training cells or a structured metric table that re-verifies the XGBoost numbers from source.
 - Because of that, the XGBoost row above is retained from earlier repository reporting rather than re-derived from the archived notebook.
 
+## Research Evidence Pack
+
+The `docs/research_pack/` directory contains institution-neutral research documentation for the rainfall prediction workflow, including an academic research brief, model card, metric provenance matrix, dataset/task card, temporal validation protocol, leakage and split risk audit, interpretability protocol, calibration and thresholding protocol, error analysis playbook, and reproducibility checklist.
+
+See [`docs/research_pack/ACADEMIC_RESEARCH_BRIEF.md`](docs/research_pack/ACADEMIC_RESEARCH_BRIEF.md) for the full problem definition, methodological risks, and future research directions.
+
+Run the validation tool to verify structural completeness without requiring a dataset or model artifact:
+
+```bash
+python tools/evidence/validate_research_pack.py
+```
+
 ## Why XGBoost Performed Best
 
 On mixed tabular weather data, gradient boosting often captures non-linear thresholds and feature interactions more effectively than Logistic Regression, while generalizing better than an overfit Random Forest. That fits the historical pattern reported here: Random Forest nearly memorized the training data, while XGBoost achieved the strongest held-out accuracy.

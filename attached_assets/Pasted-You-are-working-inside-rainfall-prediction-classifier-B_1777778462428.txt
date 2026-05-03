@@ -1,0 +1,608 @@
+You are working inside:
+
+rainfall-prediction-classifier
+
+Build a focused Rainfall Research Evidence Pack.
+
+Goal:
+Strengthen this repository as a credible academic/research artifact for classical tabular machine learning, weather prediction, reproducibility, metric provenance, temporal validation design, leakage-risk auditing, and interpretable model evaluation.
+
+Be creative but controlled. The strongest contribution here is not a new model. It is a rigorous evidence, validation, risk, and interpretation layer that makes this tabular ML project read like a serious research artifact.
+
+The public repository must remain institution-neutral. Do not write any university-specific or application-specific tailoring inside repository files. Tailoring belongs in CV/application materials, not in the public repo.
+
+Current branch should be:
+
+feature/rainfall-research-evidence-pack
+
+Do NOT switch branches.
+Do NOT modify main directly.
+Do NOT download datasets.
+Do NOT add datasets.
+Do NOT add trained model artifacts.
+Do NOT retrain models.
+Do NOT create new performance numbers.
+Do NOT fabricate metrics.
+Do NOT fabricate SHAP plots.
+Do NOT fabricate calibration plots.
+Do NOT fabricate temporal validation results.
+Do NOT claim operational forecasting.
+Do NOT claim production deployment.
+Do NOT claim weather-service readiness.
+Do NOT claim climate-risk decision validity.
+Do NOT rewrite the whole README.
+Do NOT modify core training/evaluation/inference behavior.
+
+This is an evidence, documentation, validation, and research-methodology-strengthening pass only.
+
+==================================================
+PASS 1 — INSPECT CURRENT REPOSITORY
+==================================================
+
+Before writing files, inspect:
+
+- README.md
+- results/metrics.json
+- results/model_comparison.csv
+- results/classification_report.txt if present
+- results/confusion_matrix.png if present
+- results/feature_importance.png if present
+- results/logistic_regression_confusion_matrix.png if present
+- results/sample_predictions/example_input.json if present
+- configs/
+- scripts/
+- src/rainfall_prediction/
+- tests/
+- data/README.md
+- models/README.md
+- notebooks/README.md
+- pyproject.toml
+- CITATION.cff
+
+Confirm verified facts before stating them.
+
+Expected facts to verify:
+- repository name: rainfall-prediction-classifier
+- task: predicting RainTomorrow from tabular Australian weather observations
+- target column: RainTomorrow
+- models: Logistic Regression, Random Forest, XGBoost if verified
+- dataset is not bundled
+- trained model artifact is not bundled by default
+- preserved metrics exist under results/
+- results are historical/preserved, not newly reproduced in this pass
+- README states a provenance gap around XGBoost metrics
+- README states mismatch between archived notebook framing and public package framing
+- maintained runtime is package/scripts, not notebook-only
+
+If anything is not verified, mark it as unverified and do not state it as fact.
+
+==================================================
+PRIMARY OUTPUTS
+==================================================
+
+Create:
+
+docs/research_pack/
+
+with these files:
+
+1. README.md
+2. ACADEMIC_RESEARCH_BRIEF.md
+3. MODEL_CARD.md
+4. METRIC_PROVENANCE_MATRIX.md
+5. DATASET_AND_TASK_CARD.md
+6. TEMPORAL_VALIDATION_PROTOCOL.md
+7. LEAKAGE_AND_SPLIT_RISK_AUDIT.md
+8. INTERPRETABILITY_PROTOCOL.md
+9. CALIBRATION_AND_THRESHOLDING_PROTOCOL.md
+10. ERROR_ANALYSIS_PLAYBOOK.md
+11. REPRODUCIBILITY_CHECKLIST.md
+
+Also create:
+
+tools/evidence/
+├── README.md
+└── validate_research_pack.py
+
+And add/update tests:
+
+tests/test_research_pack_exists.py
+tests/test_metric_provenance.py
+
+Do not create institution-specific file names.
+Do not include any university/application-specific language in repository files.
+
+==================================================
+PART 1 — ACADEMIC RESEARCH BRIEF
+==================================================
+
+Create:
+
+docs/research_pack/ACADEMIC_RESEARCH_BRIEF.md
+
+Include:
+
+- problem definition
+- why next-day rainfall prediction matters
+- task scope
+- maintained runtime surface
+- classical ML model families
+- current evidence artifacts
+- provenance caveats
+- methodological risks
+- future academic research directions
+
+Use institution-neutral academic wording.
+
+Allowed wording:
+- "tabular weather prediction"
+- "next-day rainfall classification"
+- "classical machine learning baseline"
+- "research artifact"
+- "preserved historical evaluation artifacts"
+- "methodological audit"
+- "temporal validation design"
+- "interpretability protocol"
+
+Forbidden wording:
+- "production weather forecasting system"
+- "operational weather service"
+- "validated climate decision system"
+- "state-of-the-art"
+- "deployment-ready forecasting"
+- "guaranteed rainfall prediction"
+- "real-time weather service"
+- "policy decision system"
+
+==================================================
+PART 2 — MODEL CARD
+==================================================
+
+Create:
+
+docs/research_pack/MODEL_CARD.md
+
+Include:
+
+- model families
+- target variable
+- input assumptions
+- dataset status
+- artifact/checkpoint status
+- intended research use
+- out-of-scope uses
+- preserved metrics
+- limitations
+- ethical/safety limitations
+- weather decision caveats
+- recommended human/research review
+
+Important:
+Use only values already present in results/metrics.json, results/model_comparison.csv, README.md, or committed results artifacts.
+Do not invent metrics.
+Do not claim fresh evaluation unless commands were actually run with dataset/model artifact.
+
+Must state:
+- dataset is not bundled
+- trained model artifact is not bundled by default
+- historical metrics are preserved and not newly reproduced in this pass
+- XGBoost provenance gap must be described exactly and honestly if verified
+- this is not an operational weather forecasting service
+
+==================================================
+PART 3 — METRIC PROVENANCE MATRIX
+==================================================
+
+Create:
+
+docs/research_pack/METRIC_PROVENANCE_MATRIX.md
+
+Trace every preserved metric used in README/results artifacts.
+
+Columns:
+
+- metric
+- value
+- source file
+- source context
+- evidence confidence
+- allowed wording
+- forbidden wording
+
+Evidence confidence examples:
+
+- verified from results/metrics.json
+- verified from results/model_comparison.csv
+- verified from README historical results section
+- preserved from earlier repository reporting
+- unverified from notebook / do not overstate
+- placeholder / do not use as performance evidence
+
+Include explicit red lines:
+
+- Do not call preserved metrics newly reproduced unless rerun commands were executed.
+- Do not present XGBoost numbers as notebook-reverified unless the notebook actually contains those cells/artifacts.
+- Do not imply production readiness.
+- Do not imply operational forecast validity.
+- Do not imply climate or policy decision validity.
+- Do not imply geographic generalization beyond the dataset.
+- Do not imply temporal robustness without temporal validation.
+
+==================================================
+PART 4 — DATASET AND TASK CARD
+==================================================
+
+Create:
+
+docs/research_pack/DATASET_AND_TASK_CARD.md
+
+Include:
+
+- task name
+- target column
+- expected local dataset path
+- dataset source reference if already present in README/data docs
+- dataset not bundled
+- trained artifact not bundled
+- public package framing vs archived notebook framing
+- label/target caveats
+- missing value handling caveat
+- geographic and temporal scope caveats
+- reproducibility notes
+
+Must explicitly include:
+- The archived notebook has a Melbourne-area same-day rainfall variant if verified.
+- The package framing is Australia-wide RainTomorrow if verified.
+- This mismatch is a provenance caveat, not something to hide.
+
+==================================================
+PART 5 — TEMPORAL VALIDATION PROTOCOL
+==================================================
+
+Create:
+
+docs/research_pack/TEMPORAL_VALIDATION_PROTOCOL.md
+
+This is the creative/strong part.
+
+Do not generate temporal results. Define the protocol only.
+
+Include:
+
+- why random splits are insufficient for weather/time-series-like tabular data
+- recommended chronological split
+- rolling-origin validation design
+- station/location-aware temporal splits
+- leakage checks involving Date, RainToday, RainTomorrow, and future-derived features
+- how to report temporal validation results later
+- minimum artifact requirements before claiming temporal robustness
+- example commands to run later only if dataset exists
+- expected output files to generate in a future pass
+
+Do not claim temporal validation has already been performed unless verified.
+
+==================================================
+PART 6 — LEAKAGE AND SPLIT RISK AUDIT
+==================================================
+
+Create:
+
+docs/research_pack/LEAKAGE_AND_SPLIT_RISK_AUDIT.md
+
+Include:
+
+- target leakage risks
+- temporal leakage risks
+- location leakage risks
+- missing-value handling risks
+- random split limitations
+- notebook/package framing mismatch risk
+- feature engineering risks
+- overfitting signs, especially Random Forest train vs test gap if verified
+- XGBoost provenance risk if verified
+- mitigation checklist
+- safe vs unsafe wording
+
+This file should be especially strong and useful for academic reviewers.
+
+==================================================
+PART 7 — INTERPRETABILITY PROTOCOL
+==================================================
+
+Create:
+
+docs/research_pack/INTERPRETABILITY_PROTOCOL.md
+
+Do not fabricate interpretability outputs.
+
+Include:
+
+- what artifacts currently exist, e.g. feature_importance.png if verified
+- what feature importance can and cannot say
+- permutation importance protocol
+- SHAP protocol for tree models, but explicitly not generated in this pass
+- coefficient interpretation for Logistic Regression if fitted artifact exists later
+- local explanation protocol for individual predictions
+- required artifact naming
+- reviewer caveats
+- no causal claims
+
+Must state:
+- "No new SHAP or permutation-importance artifacts are generated in this pass."
+
+==================================================
+PART 8 — CALIBRATION AND THRESHOLDING PROTOCOL
+==================================================
+
+Create:
+
+docs/research_pack/CALIBRATION_AND_THRESHOLDING_PROTOCOL.md
+
+Include:
+
+- why accuracy alone is insufficient
+- probability calibration
+- Brier score
+- reliability curves
+- threshold selection
+- precision/recall trade-offs for rain/no-rain
+- class imbalance considerations if verified
+- required future artifacts
+- safe wording
+- do not treat model probabilities as calibrated unless calibration is performed
+
+No fake calibration results.
+
+==================================================
+PART 9 — ERROR ANALYSIS PLAYBOOK
+==================================================
+
+Create:
+
+docs/research_pack/ERROR_ANALYSIS_PLAYBOOK.md
+
+Include:
+
+- false positives and false negatives
+- season-wise breakdown
+- location-wise breakdown
+- rainfall intensity proxy if available from features
+- edge cases around humidity, pressure, wind, rain today
+- subgroup analysis
+- temporal drift
+- artifact checklist for future error analysis
+- how to document failure cases without overclaiming
+
+No invented errors, no invented examples.
+
+==================================================
+PART 10 — REPRODUCIBILITY CHECKLIST
+==================================================
+
+Create:
+
+docs/research_pack/REPRODUCIBILITY_CHECKLIST.md
+
+Include:
+
+- installation
+- dataset setup
+- train command
+- evaluate command
+- predict command
+- test command
+- required local assets
+- what can be verified without dataset/model artifact
+- what cannot be verified without dataset/model artifact
+- expected outputs
+- limitations
+
+Do not imply train/evaluate/predict can fully run without local dataset/model.
+
+==================================================
+PART 11 — VALIDATION TOOL
+==================================================
+
+Create:
+
+tools/evidence/validate_research_pack.py
+
+The script must validate at minimum:
+
+- all required research pack files exist
+- results/metrics.json exists
+- results/model_comparison.csv exists
+- metrics.json is valid JSON
+- model_comparison.csv is parseable
+- README.md references ACADEMIC_RESEARCH_BRIEF.md
+- forbidden phrases are absent from docs/research_pack/
+- institution-specific wording is absent from docs/research_pack/
+- required limitation phrases are present somewhere in docs/research_pack/
+- temporal protocol states no temporal validation results generated in this pass
+- interpretability protocol states no SHAP/permutation artifacts generated in this pass
+- calibration protocol states no calibration results generated in this pass
+- leakage audit mentions XGBoost provenance gap if verified from README
+- dataset/task card mentions notebook/package framing mismatch if verified from README
+
+Forbidden phrases to check:
+
+- state-of-the-art
+- production deployment
+- operational weather service
+- validated climate decision system
+- deployment-ready forecasting
+- guaranteed rainfall prediction
+- real-time weather service
+- policy decision system
+
+Also block institution-specific wording:
+- Do not include literal institution names in repository docs.
+- If tests/scripts need guard strings, build them with concatenation so grep does not expose them.
+
+Required phrases to check somewhere:
+
+- dataset is not bundled
+- trained model artifact is not bundled
+- preserved
+- historical
+- temporal validation
+- leakage
+- calibration
+- interpretability
+- not operational
+
+Required CLI:
+
+python tools/evidence/validate_research_pack.py
+
+The tool must not require dataset, model artifact, or internet.
+
+==================================================
+PART 12 — TESTS
+==================================================
+
+Add/update:
+
+tests/test_research_pack_exists.py
+tests/test_metric_provenance.py
+
+Tests should verify:
+
+- all required research pack files exist
+- validation tool passes
+- metrics.json is parseable
+- model_comparison.csv is parseable
+- metric provenance matrix references model rows from model_comparison.csv
+- forbidden phrases are absent from docs/research_pack/
+- no institution-specific wording appears in docs/research_pack/
+- ACADEMIC_RESEARCH_BRIEF.md exists
+- temporal validation protocol states no temporal results generated
+- interpretability protocol states no new SHAP/permutation artifacts generated
+- calibration protocol states no calibration results generated
+- leakage audit mentions XGBoost provenance gap if README verifies it
+- dataset/task card mentions notebook/package framing mismatch if README verifies it
+- tests do not require dataset, model artifact, or internet
+
+Keep tests lightweight.
+
+==================================================
+PART 13 — README INTEGRATION
+==================================================
+
+Update README.md lightly only.
+
+Add a short section near Results, Limitations, or before Notebooks:
+
+## Research Evidence Pack
+
+Mention:
+
+- academic research brief
+- model card
+- metric provenance matrix
+- dataset/task card
+- temporal validation protocol
+- leakage and split risk audit
+- interpretability protocol
+- calibration and thresholding protocol
+- error analysis playbook
+- reproducibility checklist
+- validation tool command
+
+Keep this section short.
+Do not rewrite the README.
+Do not add new metrics.
+Do not add institutional wording.
+
+Example style:
+
+The `docs/research_pack/` directory contains institution-neutral research documentation for the rainfall prediction workflow, including an academic research brief, model card, metric provenance matrix, dataset/task card, temporal validation protocol, leakage and split risk audit, interpretability protocol, calibration and thresholding protocol, error analysis playbook, and reproducibility checklist.
+
+Run:
+
+python tools/evidence/validate_research_pack.py
+
+==================================================
+DO NOT BUILD
+==================================================
+
+Do not build:
+
+- new models
+- retraining runs
+- new metrics
+- new model artifacts
+- new dataset files
+- fake temporal validation results
+- fake SHAP outputs
+- fake calibration outputs
+- fake confusion matrices
+- fake prediction examples
+- production dashboard
+- API server
+- operational forecasting language
+- policy/climate-decision validation language
+
+==================================================
+REQUIRED CHECKS
+==================================================
+
+Run:
+
+python -m ruff check .
+python -m pytest
+python tools/evidence/validate_research_pack.py
+
+Also run:
+
+git grep -n -i -E 'KAUST|PROJECT_BRIEF_KAUST|King Abdullah|University of Science and Technology|agent-lab|Replit|attached_assets|Saved progress|state-of-the-art|production deployment|operational weather service|validated climate decision system|deployment-ready forecasting|guaranteed rainfall prediction|real-time weather service|policy decision system' -- . || true
+
+Expected:
+No matches in active tracked files.
+
+If grep matches appear only because tests/tools contain guard strings, split those strings with concatenation and rerun grep until no visible match remains.
+
+==================================================
+COMMIT / PUSH
+==================================================
+
+If git commit and push are allowed:
+
+Commit with:
+
+Add rainfall research evidence pack
+
+Push only:
+
+feature/rainfall-research-evidence-pack
+
+Do NOT merge to main.
+
+If git operations are blocked, write the files, run checks, and provide exact shell commands for me to stage, commit, and push.
+
+==================================================
+FINAL REPORT REQUIRED
+==================================================
+
+Report only:
+
+1. Repository confirmed
+2. Active branch
+3. Main not modified
+4. Files created
+5. Files updated
+6. Evidence pack summary
+7. Model card summary
+8. Metric provenance summary
+9. Temporal validation protocol summary
+10. Leakage and split risk audit summary
+11. Interpretability protocol summary
+12. Calibration and thresholding protocol summary
+13. Error analysis playbook summary
+14. Validation tool result
+15. ruff result
+16. pytest result
+17. grep scan result
+18. Commit status
+19. Push status
+20. Remaining limitations
